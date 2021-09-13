@@ -12,7 +12,7 @@ connection.connect((error, result) => {
       throw error;
   });
 
-app.get(`/:box/:from/:to`, (req, res) => 
+app.get(`/readings/:box/:from/:to`, (req, res) => 
 {
     // parse params
     const boxId = req.params.box;
@@ -29,7 +29,7 @@ app.get(`/:box/:from/:to`, (req, res) =>
     });
 });
 
-app.get(`/aggregate`, (req, res) => 
+app.get(`/readings/aggregate`, (req, res) => 
 {
     // get data and return 500 if there is an error, or send back a result json
     getSensorSummary(connection, function (error, results)
