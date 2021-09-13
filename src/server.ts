@@ -12,12 +12,12 @@ connection.connect((error, result) => {
       throw error;
   });
 
-app.get(`/readings/:box/:from/:to`, (req, res) => 
+app.get(`/readings/:box?/:from?/:to?`, (req, res) => 
 {
     // parse params
-    const boxId = req.params.box;
-    const from = new Date(req.params.from) || undefined;
-    const to = new Date(req.params.to) || undefined;
+    const boxId = req.params.box || undefined;
+    const from = req.params.from && new Date(req.params.from) || undefined;
+    const to = req.params.to && new Date(req.params.to) || undefined;
 
     // get data and return 500 if there is an error, or send back a result json
     getBoxReadings(connection, boxId, from, to, function (error, results)
@@ -29,7 +29,7 @@ app.get(`/readings/:box/:from/:to`, (req, res) =>
     });
 });
 
-app.get(`/readings/aggregate`, (req, res) => 
+app.get(`/aggregate`, (req, res) => 
 {
     // get data and return 500 if there is an error, or send back a result json
     getSensorSummary(connection, function (error, results)
