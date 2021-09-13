@@ -1,9 +1,16 @@
 import express from 'express';
 import { getSensorSummary, getBoxReadings } from './sql_requests'
-import { connection } from './db';
+import { createSqlConnection } from './db';
 
 const app = express();
 const port = 8080;
+const connection = createSqlConnection("");
+
+// Test DB connection
+connection.connect((error, result) => {
+    if (error)
+      throw error;
+  });
 
 app.get(`/:box/:from/:to`, (req, res) => 
 {

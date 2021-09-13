@@ -40,6 +40,7 @@ export function getBoxReadings(connection: Connection, box?: String, from?: Date
         readings.reading_ts 
     FROM readings INNER JOIN sensors ON readings.sensor_id = sensors.id`;
 
+    // Build condition depending on input parameters
     var conditionString = "";
 
     if (box)
